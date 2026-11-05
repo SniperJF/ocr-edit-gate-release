@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ocrgate"
+version = "1.0.0"
+description = "Rewrite, Then Veto: Rewriter-Agnostic Edit Gating for LLM-Based Post-OCR Correction"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+dependencies = [
+  "hipe-ocrepair-scorer==0.9.9",
+  "openai>=1.40",
+  "rapidfuzz>=3.9",
+  "pyyaml>=6.0",
+  "numpy",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8.0"]
+
+[tool.setuptools]
+packages = ["ocrgate"]

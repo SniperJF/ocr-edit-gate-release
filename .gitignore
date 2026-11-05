@@ -1,0 +1,14 @@
+# Upstream repos (cloned by scripts/fetch_data.sh at pinned commits; this repository does not redistribute HIPE data)
+/HIPE-OCRepair-2026-eval/
+/HIPE-OCRepair-2026-data/
+# Per-run artefacts contain dataset text (predictions, per-unit logs) and weights
+/runs/
+/logs/
+/results/
+# Synthetic-data working dir (third-party clean texts + generated pairs; regenerable with scripts/p3_fetch_clean.py)
+/data_synth/
+.venv*/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/

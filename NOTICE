@@ -1,0 +1,40 @@
+ocr-edit-gate
+Copyright 2026 The ocr-edit-gate authors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+THIRD-PARTY COMPONENTS AND DATA (none of the following is included in this repository)
+
+1. Official evaluation
+   - hipe-ocrepair-scorer 0.9.9 (https://github.com/hipe-eval/hipe-ocrepair-scorer): MIT License.
+     Installed from PyPI as a dependency; not vendored.
+   - HIPE-OCRepair-2026-eval (https://github.com/hipe-eval/HIPE-OCRepair-2026-eval, commit 47a71d8):
+     GNU Affero General Public License v3.0. Cloned at runtime by scripts/fetch_data.sh and called as an
+     external program (lib/score_one.py); not vendored or modified.
+
+2. Data: HIPE-OCRepair-2026-data (https://github.com/hipe-eval/HIPE-OCRepair-2026-data, tag v0.9.5 = commit bd463f7).
+   Not redistributed. Cloned at runtime by scripts/fetch_data.sh. Per-dataset licenses as stated by the organisers:
+   - icdar2017:          CC BY-NC-SA 4.0
+   - impresso-snippets:  CC BY-NC-SA 4.0
+   - impresso-nzz:       CC BY-NC 4.0
+   - overproof:          "Research use only" (participation guidelines); CC BY-NC-SA 4.0 for the structured
+                         format and annotations (dataset README; underlying newspaper text public domain)
+   - dta19:              CC BY-NC 4.0 (participation guidelines); CC BY-SA 4.0 (dataset README). The two
+                         sources disagree; check with the organisers before any non-research use.
+
+3. Base models (weights not included; downloaded from the Hugging Face Hub by the user)
+   - Qwen/Qwen3-0.6B (edit-gate encoder), Qwen/Qwen3-8B, Qwen/Qwen3-32B, Qwen/Qwen3.8-27B: Apache-2.0
+   - mistralai/Mistral-Small-24B-Instruct-2501: Apache-2.0
+   - Qwen/Qwen2.5-72B-Instruct: Qwen LICENSE AGREEMENT (release date September 19, 2024).
+     "Qwen is licensed under the Qwen LICENSE AGREEMENT, Copyright (c) Alibaba Cloud. All Rights Reserved."
+     Models trained with Qwen2.5-72B-Instruct or its outputs (the LoRA-72B adapters and the edit gates,
+     whose training blocks include Qwen2.5-72B-Instruct rewrites) are "Built with Qwen".
+
+4. Synthetic-data sources used by scripts/p3_fetch_clean.py (downloaded by the user; not included)
+   - Project Gutenberg texts (public domain in the US; Project Gutenberg License for the PG wrapper, stripped)
+   - Wikisource "Die Gartenlaube" (texts public domain; transcriptions CC BY-SA 3.0, Wikisource contributors)
+   - impresso-nzz train ground truth (CC BY-NC 4.0)
+
+5. Python dependencies (installed by the user): vLLM, PyTorch, Transformers, PEFT, Accelerate, safetensors,
+   tokenizers (Apache-2.0 / BSD-3-Clause), scikit-learn, SciPy, NumPy (BSD-3-Clause), openai (Apache-2.0),
+   RapidFuzz (MIT), PyYAML (MIT), pytest (MIT).

@@ -1,0 +1,5 @@
+role	path	bytes	sha256
+Qwen3.8-27B LoRA adapter (P4-c, epoch 1)	runs/lora/qwen38-27b-p4/ep1/adapter_model.safetensors	467062560	f19eb627e39dc4cd99d73fcfe7d7323190666dd6859b71223cdde6b1652a6c1d
+adapter config	runs/lora/qwen38-27b-p4/ep1/adapter_config.json	1258	4e39d975b31bf9bfbe2751ca70cb6c2c5ddbf70bca819a7c6f6ff33e3baebe16
+P4 ensemble configuration (tracked)	results/p4_frozen_ensemble.json	1635	48da356b36a8d9b54aa6de2cfadefb503ae1f0c0b43d2428b03192d5339b031f
+P4 epoch selection (tracked)	results/p4_epoch_selection.json	755	5360784eda7f066a27afa4b84e10f1d071bf4c97fe2213459b4b0602fa8f25e8

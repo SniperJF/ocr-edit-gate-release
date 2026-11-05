@@ -1,0 +1,90 @@
+{
+ "lora24b": {
+  "chosen_epoch": 2,
+  "criterion": "lowest held-out-train weighted cMER (tie: higher pref, lower epoch)",
+  "candidates": {
+   "1": {
+    "heldout_run": "20261030T094013Z_zeroshot_train_lora24b-ep1-ho",
+    "heldout_cmer": 0.012588888888888887,
+    "heldout_pref": 0.8336666666666667,
+    "dev_run": "20261030T094714Z_zeroshot_dev_lora24b-ep1",
+    "dev_cmer": 0.013526666666666668,
+    "dev_pref": 0.8122199999999999
+   },
+   "2": {
+    "heldout_run": "20261030T094959Z_zeroshot_train_lora24b-ep2-ho",
+    "heldout_cmer": 0.011816666666666665,
+    "heldout_pref": 0.8472222222222222,
+    "dev_run": "20261030T095711Z_zeroshot_dev_lora24b-ep2",
+    "dev_cmer": 0.01388,
+    "dev_pref": 0.8556466666666667
+   }
+  }
+ },
+ "lora32b": {
+  "chosen_epoch": 2,
+  "criterion": "lowest held-out-train weighted cMER (tie: higher pref, lower epoch)",
+  "candidates": {
+   "1": {
+    "heldout_run": "20261030T100453Z_zeroshot_train_lora32b-ep1-ho",
+    "heldout_cmer": 0.012188888888888888,
+    "heldout_pref": 0.784738888888889,
+    "dev_run": "20261030T101537Z_zeroshot_dev_lora32b-ep1",
+    "dev_cmer": 0.013606666666666666,
+    "dev_pref": 0.88246
+   },
+   "2": {
+    "heldout_run": "20261030T101923Z_zeroshot_train_lora32b-ep2-ho",
+    "heldout_cmer": 0.011938888888888888,
+    "heldout_pref": 0.8239777777777778,
+    "dev_run": "20261030T103005Z_zeroshot_dev_lora32b-ep2",
+    "dev_cmer": 0.013219999999999999,
+    "dev_pref": 0.85272
+   }
+  }
+ },
+ "lora72b": {
+  "chosen_epoch": 2,
+  "criterion": "lowest held-out-train weighted cMER (tie: higher pref, lower epoch)",
+  "candidates": {
+   "1": {
+    "heldout_run": "20261031T012007Z_zeroshot_train_lora72b-ep1-ho",
+    "heldout_cmer": 0.011433333333333332,
+    "heldout_pref": 0.8381,
+    "dev_run": "20261031T013753Z_zeroshot_dev_lora72b-ep1",
+    "dev_cmer": 0.011940000000000001,
+    "dev_pref": 0.8417933333333334
+   },
+   "2": {
+    "heldout_run": "20261031T014354Z_zeroshot_train_lora72b-ep2-ho",
+    "heldout_cmer": 0.010833333333333334,
+    "heldout_pref": 0.8646055555555555,
+    "dev_run": "20261031T020135Z_zeroshot_dev_lora72b-ep2",
+    "dev_cmer": 0.01182,
+    "dev_pref": 0.8911
+   }
+  }
+ },
+ "lora72b-syn": {
+  "chosen_epoch": 1,
+  "criterion": "lowest held-out-train weighted cMER (tie: higher pref, lower epoch)",
+  "candidates": {
+   "1": {
+    "heldout_run": "20261031T071801Z_zeroshot_train_lora72b-syn-ep1-ho",
+    "heldout_cmer": 0.0106,
+    "heldout_pref": 0.8898611111111111,
+    "dev_run": "20261031T073628Z_zeroshot_dev_lora72b-syn-ep1",
+    "dev_cmer": 0.01158,
+    "dev_pref": 0.94404
+   },
+   "2": {
+    "heldout_run": "20261031T074229Z_zeroshot_train_lora72b-syn-ep2-ho",
+    "heldout_cmer": 0.010672222222222222,
+    "heldout_pref": 0.8517722222222223,
+    "dev_run": "20261031T080030Z_zeroshot_dev_lora72b-syn-ep2",
+    "dev_cmer": 0.011453333333333333,
+    "dev_pref": 0.8797666666666666
+   }
+  }
+ }
+}

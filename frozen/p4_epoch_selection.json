@@ -1,0 +1,24 @@
+{
+ "qwen38-lora": {
+  "chosen_epoch": 1,
+  "criterion": "lowest held-out-train weighted cMER (tie: higher pref, lower epoch)",
+  "candidates": {
+   "1": {
+    "heldout_run": "20261031T180207Z_zeroshot_train_qwen38-lora-ep1-ho",
+    "heldout_cmer": 0.008755555555555556,
+    "heldout_pref": 0.8815277777777778,
+    "dev_run": "20261031T181336Z_zeroshot_dev_qwen38-lora-ep1",
+    "dev_cmer": 0.009420000000000001,
+    "dev_pref": 0.9221466666666667
+   },
+   "2": {
+    "heldout_run": "20261031T181744Z_zeroshot_train_qwen38-lora-ep2-ho",
+    "heldout_cmer": 0.008905555555555555,
+    "heldout_pref": 0.8692944444444445,
+    "dev_run": "20261031T182919Z_zeroshot_dev_qwen38-lora-ep2",
+    "dev_cmer": 0.00944,
+    "dev_pref": 0.9149666666666667
+   }
+  }
+ }
+}

@@ -1,0 +1,6 @@
+# Client-side environment (the vLLM server runs from its own venv: requirements-gpu.txt, path in VLLM_ENV).
+hipe-ocrepair-scorer==0.9.9   # official scorer package used by HIPE-OCRepair-2026-eval/lib/score_one.py
+openai>=1.40
+rapidfuzz>=3.9
+pyyaml>=6.0
+pytest>=8.0

@@ -1,0 +1,87 @@
+# Phase 0b configuration (Phase 0 settings plus the window_gated system) (see README.md).
+# All paths are relative to the repository root (the directory containing this configs/ folder).
+
+seed: 1234
+
+data:
+  # Pinned upstream sources (cloned by scripts/fetch_data.sh, git-ignored; not redistributed here).
+  data_repo_url: https://github.com/hipe-eval/HIPE-OCRepair-2026-data
+  data_repo_dir: HIPE-OCRepair-2026-data
+  data_repo_commit: bd463f7e340280473d9e5bab5e231f4922ea1a3b   # tag v0.9.5 "Final Competition Data"
+  eval_repo_url: https://github.com/hipe-eval/HIPE-OCRepair-2026-eval
+  eval_repo_dir: HIPE-OCRepair-2026-eval
+  eval_repo_commit: 47a71d89e900ddff682b094e755b884271ef5244
+  scorer_script: HIPE-OCRepair-2026-eval/lib/score_one.py
+
+# Each split lists reference files (with ground truth) and the official competition weight of
+# the cell (DTA noise levels 1/3 each, all others 1; see eval repo README / competition_config.json).
+# `official: false` cells are scored and reported but excluded from the weighted mean.
+splits:
+  dev:
+    # NOTE: there is no icdar2017 fr dev file in the v0.9.5 release, so the dev weighted mean
+    # covers 7 of the 8 official cells. DTA dev uses the *unmatched* files because the official
+    # DTA test sets are unmatched.
+    - {path: HIPE-OCRepair-2026-data/data/v0.9/icdar2017/en/hipe-ocrepair-bench_v0.9_icdar2017_v1.1_dev_en.jsonl, weight: 1.0}
+    - {path: HIPE-OCRepair-2026-data/data/v0.9/impresso-snippets/en/hipe-ocrepair-bench_v0.9_impresso-snippets_v1.0_dev_en.jsonl, weight: 1.0}
+    - {path: HIPE-OCRepair-2026-data/data/v0.9/impresso-snippets/fr/hipe-ocrepair-bench_v0.9_impresso-snippets_v1.0_dev_fr.jsonl, weight: 1.0}
+    - {path: HIPE-OCRepair-2026-data/data/v0.9/impresso-snippets/de/hipe-ocrepair-bench_v0.9_impresso-snippets_v1.0_dev_de.jsonl, weight: 1.0}
+    - {path: HIPE-OCRepair-2026-data/data/v0.9/dta19/de/hipe-ocrepair-bench_v0.9_dta19-l0_v0.1_dev-unmatched_de.jsonl, weight: 0.3333333333333333}
+    - {path: HIPE-OCRepair-2026-data/data/v0.9/dta19/de/hipe-ocrepair-bench_v0.9_dta19-l1_v0.1_dev-unmatched_de.jsonl, weight: 0.3333333333333333}
+    - {path: HIPE-OCRepair-2026-data/data/v0.9/dta19/de/hipe-ocrepair-bench_v0.9_dta19-l2_v0.1_dev-unmatched_de.jsonl, weight: 0.3333333333333333}
+    - {path: HIPE-OCRepair-2026-data/data/v0.9/overproof/en/hipe-ocrepair-bench_v0.9_overproof-combined_v1.0_dev_en.jsonl, weight: 1.0, official: false}
+  # Official competition test references (as used by the organisers: DTA reduced to 30 units,
+  # exclusion flags applied). Ground truth is public. Use ONLY for the no-correction sanity check
+  # and final reporting -- never for tuning.
+  test:
+    - {path: HIPE-OCRepair-2026-eval/data/reference/hipe-ocrepair-bench_v0.9_icdar2017_v1.1_test_en.jsonl, weight: 1.0}
+    - {path: HIPE-OCRepair-2026-eval/data/reference/hipe-ocrepair-bench_v0.9_icdar2017_v1.1_test_fr.jsonl, weight: 1.0}
+    - {path: HIPE-OCRepair-2026-eval/data/reference/hipe-ocrepair-bench_v0.9_impresso-snippets_v1.0_test_en.jsonl, weight: 1.0}
+    - {path: HIPE-OCRepair-2026-eval/data/reference/hipe-ocrepair-bench_v0.9_impresso-snippets_v1.0_test_fr.jsonl, weight: 1.0}
+    - {path: HIPE-OCRepair-2026-eval/data/reference/hipe-ocrepair-bench_v0.9_impresso-snippets_v1.0_test_de.jsonl, weight: 1.0}
+    - {path: HIPE-OCRepair-2026-eval/data/reference/hipe-ocrepair-bench_v0.9_dta19-l0_v0.1_test_de.jsonl, weight: 0.3333333333333333}
+    - {path: HIPE-OCRepair-2026-eval/data/reference/hipe-ocrepair-bench_v0.9_dta19-l1_v0.1_test_de.jsonl, weight: 0.3333333333333333}
+    - {path: HIPE-OCRepair-2026-eval/data/reference/hipe-ocrepair-bench_v0.9_dta19-l2_v0.1_test_de.jsonl, weight: 0.3333333333333333}
+
+endpoint:
+  base_url: http://127.0.0.1:8000/v1     # overridable with --base-url
+  api_key_env: VLLM_API_KEY               # bearer token is read from this env var, never logged
+  model: Qwen/Qwen3-8B
+  enable_thinking: false                  # passed as chat_template_kwargs (Qwen3 hybrid thinking off)
+  concurrency: 64                         # max in-flight requests
+  timeout_s: 900
+  max_retries: 3
+
+generation:
+  temperature: 0.0                        # greedy; deterministic up to vLLM batching nondeterminism
+  top_p: 1.0
+  seed: 1234                              # per-request vLLM sampling seed
+
+systems:
+  nocorrect: {}
+
+  zeroshot:
+    # Whole transcription unit in, whole corrected unit out.
+    max_tokens_min: 512
+    max_tokens_per_char: 0.6              # max_tokens = max(min, per_char * len(ocr)); ~1.7 chars/token headroom
+    fallback_to_input_on_failure: true    # empty / truncated (finish_reason=length) output -> keep OCR (counted in log)
+
+  oracle_gated:
+    # ORACLE: gate built from the Levenshtein alignment OCR<->ground truth (upper-bound diagnostic only).
+    expand_to_tokens: true                # grow each error op to whitespace-delimited token boundaries
+    merge_adjacent_tokens: true           # merge gated spans separated only by whitespace
+    drop_scoring_irrelevant: true         # drop spans whose GT replacement leaves norm(doc) unchanged (case/punct-only)
+    context_chars: 300                    # chars of context shown on each side of the marked span
+    max_tokens: 128
+    max_len_ratio: 3.0                    # reject a proposal longer than max(ratio*len(span), len(span)+max_len_slack)
+    max_len_slack: 30
+
+  window_gated:
+    # ORACLE gate as above; the model rewrites a short window around the marked span and only edits
+    # inside the span are kept (char granularity; see ocrgate/edits.py and systems.window_gated).
+    expand_to_tokens: true
+    merge_adjacent_tokens: true
+    drop_scoring_irrelevant: true
+    window_chars: 40                      # chars of OCR context on each side of the span (cut at whitespace)
+    max_tokens: 256                       # 0b-3 thinking-on probe overrides this to 1024 (--set max_tokens=1024)
+    max_len_ratio: 2.0                    # reject a rewrite longer than ratio*len(window) + slack chars
+    max_len_slack: 20

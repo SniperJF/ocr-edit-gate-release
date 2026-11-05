@@ -1,0 +1,21 @@
+{
+ "beats_p3": true,
+ "members": [
+  "lora72b",
+  "lora72bsyn",
+  "qwen38zs",
+  "qwen38lora"
+ ],
+ "families": [
+  "lora72b",
+  "lora72bsyn",
+  "qwen38zs",
+  "qwen38lora"
+ ],
+ "levels": 2,
+ "thresholds": [
+  0.6671476364135742,
+  0.1225232183933258
+ ],
+ "chosen_epoch": 1
+}

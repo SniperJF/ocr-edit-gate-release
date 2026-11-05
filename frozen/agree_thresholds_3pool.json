@@ -1,0 +1,14 @@
+{
+ "t_single": 0.7563575506210327,
+ "t_agree": 0.07864424213767052,
+ "gain_kept_agree_rule": 8.255708530536989,
+ "t_global": 0.4532618522644043,
+ "gain_kept_global": 7.991048977027411,
+ "n_single": 17671,
+ "n_agree": 18195,
+ "gain_oracle": 9.85068744541669,
+ "helpful_frac_single": 0.22075717276894347,
+ "helpful_frac_agree": 0.746303929651003,
+ "n_rows": 35866,
+ "roles": "gate_heldout"
+}

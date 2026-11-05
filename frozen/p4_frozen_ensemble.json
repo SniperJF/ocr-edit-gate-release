@@ -1,0 +1,49 @@
+{
+ "members": [
+  "lora72b",
+  "lora72bsyn",
+  "qwen38zs",
+  "qwen38lora"
+ ],
+ "families": [
+  "lora72b",
+  "lora72bsyn",
+  "qwen38zs",
+  "qwen38lora"
+ ],
+ "levels": 2,
+ "thresholds": [
+  0.6671476364135742,
+  0.1225232183933258
+ ],
+ "gate_heldout_cmer": 0.007294444444444444,
+ "gate_heldout_pref": 0.845961111111111,
+ "heldout_run": "runs/20261031T184844Z_ensemble_train_ho-p4e-lora72b+lora72bsyn+qwen38zs+qwen38lora-L2",
+ "gate_heldout_rescore_run": "runs/20261031T184857Z_rescore_train_gh-p4e-lora72b+lora72bsyn+qwen38zs+qwen38lora-L2",
+ "p3_reference_same_batch": {
+  "members": [
+   "lora24b",
+   "lora32b",
+   "lora72b",
+   "lora72bsyn"
+  ],
+  "levels": 3,
+  "thresholds": [
+   0.7786493301391602,
+   0.3098590523004532,
+   0.011687257327139378
+  ],
+  "gate_heldout_cmer": 0.007577777777777778,
+  "gate_heldout_pref": 0.8832166666666666,
+  "heldout_run": "runs/20261031T183953Z_ensemble_train_ho-p4e-lora24b+lora32b+lora72b+lora72bsyn-L3",
+  "p3_reported": [
+   0.0076,
+   0.8832
+  ]
+ },
+ "beats_p3": true,
+ "criterion": "lowest unrounded official weighted cMER of the actual ensemble on the 360 gate_heldout units among the declared candidate pools containing a Qwen3.8 family (tie: higher pref); beats_p3 iff strictly lower than the P3 frozen pool re-run in the same batch; per-level thresholds by labelled gain on the same units (ocrgate.p3_pool)",
+ "candidates": "results/p4_candidates.tsv",
+ "search": "results/p4_pool_search.json",
+ "note": "written by the same code as the tail of scripts/p4_select.sh after its json step failed on a bash->python literal (true vs True); every ensemble run had completed; nothing re-run"
+}

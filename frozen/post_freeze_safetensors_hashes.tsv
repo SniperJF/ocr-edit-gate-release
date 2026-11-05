@@ -1,0 +1,8 @@
+# Post-freeze safetensors copies of the frozen gate checkpoints (converted 2026-10-31 with scripts/gate_to_safetensors.py, CPU).
+# Identical tensors to model.pt (same 314 keys, dtypes, shapes; torch.equal for every tensor). NOT part of the frozen configuration:
+# the frozen hashes of model.pt stay in p2_frozen_hashes.tsv. Columns: path, size (bytes), sha256, source model.pt sha256.
+runs/gates/p2_pooled/model.safetensors	1193202124	b9aff74033c2d30896620ba8c22dd96dba112da9b7bb74d195fa9ee60e7b2d70	a8d11d8782040baf8e1485559461a8e5709d6c896e14f382f850d58911bc3762
+runs/gates/p2_pooled_nolp/model.safetensors	1193202124	90226aadfd85f1756b4b358318ada4484a87c63f654fcd09971542d0d5c03ae6	a3a543d305957b3a53e4585783ebc83ca504a14b944c1a97be87055149fc3a9a
+# Phase 1 gates (converted 2026-11-03 UTC, same script and checks; frozen model.pt hashes are in FROZEN_CONFIG_P1.md).
+runs/gates/qwen06_pooled/model.safetensors	1193202124	9875c316bbdb600a9169874b4f3aa6a59b5991438f46886f08a1db91e5e75cc8	53d5335db289d1ce44362b5428d662910a6a90078554eabd7112907c54a1e906
+runs/gates/qwen06_pooled_nolp/model.safetensors	1193202124	d563b0fb70411cf202a3ab45fe2a8b4f9046857b52369e8daef821a0efb94bb2	30d751dff9d0eb3424c3c3fd722ff13a1327e9662183a3d46cfa4ffea1f5406a
